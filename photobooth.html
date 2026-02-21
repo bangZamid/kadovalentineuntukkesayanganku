@@ -99,7 +99,7 @@
 <body>
 
     <h1>📸 Photobooth Verlyn & Dimaz</h1>
-    <p>Pilih bingkai favoritmu dan cekrek!</p>
+    <p>choose your favorite frame and take the photo!</p>
 
     <div class="frame-selection">
         <img src="frame/frame 1.png" class="frame-thumb active" onclick="changeFrame('frame/frame 1.png', this)">
@@ -119,7 +119,7 @@
         </div>
     </div>
 
-    <button onclick="takeSnap()" class="snap-btn">CEKREK!</button>
+    <button onclick="takeSnap()" class="snap-btn">TAKE</button>
 
     <canvas id="canvas"></canvas>
 
@@ -186,7 +186,7 @@
         context.drawImage(frameToDraw, 0, 0, canvas.width, canvas.height);
         
         const link = document.createElement('a');
-        link.download = 'Momen_Verlyn_Dimaz.png';
+        link.download = 'Memories_Verlyn_Dimaz.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
     };
@@ -195,4 +195,5 @@
         initCamera();
     </script>
 </body>
+
 </html>
