@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Developer - Dimaz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffecd2, #fcb69f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #444;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .header-title h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #d63384;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .title-underline {
+            width: 300px; /* Panjang garis */
+            height: 4px;  /* Ketebalan garis */
+            background: linear-gradient(to right, #ff9a9e, #d63384, #ff9a9e);
+            margin: 15px auto 0; /* Menaruh di tengah dan kasih jarak ke bawah */
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .title-underline::after {
+            content: '❤️';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Struktur Zig-Zag */
+        .section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 80px;
+            gap: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        /* Baris Genap (Dibalik) */
+        .section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .text-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+        }
+
+        .image-box {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-box img {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            border: 5px solid white;
+        }
+
+        h2 { font-family: 'Dancing Script', cursive; color: #d63384; font-size: 2rem; margin-top: 0; }
+        p { line-height: 1.7; text-align: justify; font-size: 0.95rem; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn-container { text-align: center; padding-bottom: 50px; }
+        .back-btn {
+            padding: 12px 30px;
+            background: #d63384;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        /* Responsif HP */
+        @media (max-width: 768px) {
+            .section, .section.reverse { flex-direction: column; text-align: center; }
+            .image-box img { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-title">
+        <h1>Tentang Developer</h1>
+        <div class="title-underline"></div>
+    </div>
+
+    <div class="container">
+        
+        <div class="section" style="animation-delay: 0.4s;">
+            <div class="text-box">
+                <h2>Aku Adalah ...</h2>
+                <p>
+                    <b>Dimaz</b>, lahir di Jakarta, 14 April 2009 dengan nama lengkap Vincentius Dimaz Satria Bayanaka. Bekasi menjadi saksi tumbuh kembangku dari balita sampai remaja. Aku memutuskan untuk meninggalkan zona nyamanku dengan pindah ke SMA PL Van Lith, Magelang. Tempat baru itu melahirkan sebuah kenangan baru yang elok.
+                </p>
+            </div>
+            <div class="image-box">
+                <img src="foto slide/photo 5.jpeg" alt="Foto Kenangan 1">
+            </div>
+        </div>
+
+        <div class="section reverse" style="animation-delay: 0.8s;">
+            <div class="text-box">
+                <h2>Rumah Baru ...</h2>
+                <p>
+                    Di sekolah yang jauh dari rumah, aku berusaha berdamai dengan keadaan yang tidak aku sukai. Pada mulanya, hidupku bergejolak dengan berbagai niat dan tindakan yang tidak seharusnya ada. Waktu demi waktu berlalu, aku mulai menerima semuanya. Meski demikian, masih banyak gejolak hidup dalam diriku. Namun semua itu berubah dengan hadirnya seorang wanita.
+                </p>
+            </div>
+            <div class="image-box">
+                <img src="foto slide/photo 6.jpeg" alt="Foto Kenangan 2">
+            </div>
+        </div>
+
+        <div class="section" style="animation-delay: 1.2s;">
+            <div class="text-box">
+                <h2>Sang Wanita</h2>
+                <p>
+                    <b>Monica Verlyn Christyarini</b> nama wanita itu. Dia yang tiba-tiba datang dalam kehampaan. Dunia rasanya tidak sama lagi seperti dulu. Semuanya warna-warni bagai pelangi yang menghiasa angkasa raya. Berkat kamu hidupku menjadi penuh makna indah.  
+                </p>
+            </div>
+            <div class="image-box">
+                <img src="foto slide/photo 7.jpeg" alt="Foto Kenangan 3">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="back-btn-container">
+        <a href="index.html" class="back-btn">back to home</a>
+    </div>
+
+    <script>
+    // Memaksa halaman muat ulang jika dibuka lewat tombol back browser
+        window.addEventListener("pageshow", function (event) {
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            window.location.reload();
+            }
+        });
+    </script>
+
+</body>
+</html>

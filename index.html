@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for Monica Verlyn</title>
+    
+    <script>
+     if (sessionStorage.getItem("isLoggedIn") !== "true") {
+        window.location.replace("login.html");
+    }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="menu-left">
+            <a href="photobooth.html" class="nav-link">📸 Menu Foto</a>
+        </div>
+        <div class="menu-right">
+            <a href="sejarah.html" class="nav-link">Kumpulan Sejarah</a>
+            <a href="about-dev.html" class="nav-link">Tentang Developer</a>
+            <a href="web-story.html" class="nav-link">Sejarah Website</a>
+        </div>
+    </nav>
+
+    <div class="slideshow-container">
+    <div class="mySlides fade-left">
+        <div class="bg-blur" style="background-image: url('foto slide/photo 1.jpg');"></div>
+        <img src="foto slide/photo 1.jpg" class="img-main">
+    </div>
+
+    <div class="mySlides fade-left">
+        <div class="bg-blur" style="background-image: url('foto slide/photo 2.jpeg');"></div>
+        <img src="foto slide/photo 2.jpeg" class="img-main">
+    </div>
+
+    <div class="mySlides fade-left">
+        <div class="bg-blur" style="background-image: url('foto slide/photo 3.jpeg');"></div>
+        <img src="foto slide/photo 3.jpeg" class="img-main">
+    </div>
+
+    <div class="mySlides fade-left">
+        <div class="bg-blur" style="background-image: url('foto slide/photo 4.jpg');"></div>
+        <img src="foto slide/photo 4.jpg" class="img-main">
+    </div>
+    
+    <div class="overlay"></div>
+    </div>
+
+    <div class="welcome-text">
+        <h2 class="typing">Selamat Datang Yang Tersayang,</h2>
+        <h1 class="name">Monica Verlyn Christyarini</h1>
+        <p class="sub-text">Klik menu di pojok untuk melihat kejutanmu.</p>
+    </div>
+
+    <footer>
+        <p>copyright 2026 - by Vincentius Dimaz Satria Bayanaka</p>
+    </footer>
+
+    <script>
+       let slideIndex = 0;
+        showSlides();
+
+    function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    
+    slideIndex++;
+    
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }    
+   
+    slides[slideIndex-1].style.display = "block";  
+    
+    setTimeout(showSlides, 3000); 
+    }
+
+    // Memaksa halaman muat ulang jika dibuka lewat tombol back browser
+    window.addEventListener("pageshow", function (event) {
+        if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+            window.location.reload();
+        }
+    });
+    </script>
+</body>
+</html>

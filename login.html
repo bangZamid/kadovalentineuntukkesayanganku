@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Special Gift</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            width: 300px;
+            margin: auto;
+            margin-top: 15vh;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 25px;
+            border: none;
+            outline: none;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: #ff4d6d;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .login-btn:hover { background: #ff758f; }
+    </style>
+</head>
+<body style="background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%); display: flex; align-items: center; justify-content: center; height: 100vh;">
+
+    <div class="login-box">
+        <h2 style="text-align: center; color: white;">🔐 Welcome Home</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <p id="errorMsg" style="color: #800; font-size: 0.8em; text-align: center; margin-top: 10px; display: none;">Username atau Password salah!</p>
+    </div>
+
+    <script>
+        // DATA LOGIN (Ganti sesuai keinginanmu)
+        const USERNAME_BENAR = "cup";
+        const PASSWORD_BENAR = "dimazverlyn141225";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const autoAccess = urlParams.get('access');
+
+        // 1. LOGIKA LOGIN OTOMATIS (VIA QR CODE)
+        // Link di QR Code nanti: websitekamu.com/login.html?access=verlynsayang
+        if (autoAccess === "verlynsayang") {
+            sessionStorage.setItem("isLoggedIn", "true");
+            window.location.href = "index.html";
+        }
+
+        // 2. LOGIKA LOGIN MANUAL
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const user = document.getElementById("username").value;
+            const pass = document.getElementById("password").value;
+
+            if (user === USERNAME_BENAR && pass === PASSWORD_BENAR) {
+                sessionStorage.setItem("isLoggedIn", "true");
+                window.location.href = "index.html";
+            } else {
+                document.getElementById("errorMsg").style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

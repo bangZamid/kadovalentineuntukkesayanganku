@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Booth - Verlyn & Dimaz</title>
+    <style>
+        body {
+            background: #ffebee;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-y: auto;
+        }
+
+        /* PILIHAN BINGKAI DI TENGAH */
+        .frame-selection {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .frame-thumb {
+            width: 70px;
+            height: 90px;
+            border: 3px solid white;
+            border-radius: 10px;
+            cursor: pointer;
+            background: white;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .frame-thumb.active {
+            border-color: #ff4d6d;
+            transform: scale(1.1);
+        }
+
+        /* AREA KAMERA */
+        #camera-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #camera-container {
+            width: 90%;
+            max-width: 320px; /* Ukuran Portrait */
+            border: 8px solid white;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Video memenuhi kotak tanpa gepeng */
+            z-index: 1;
+            transform: scaleX(-1);
+        }
+
+        .frame-overlay {
+            position: relative;
+            width: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        #frame-img {
+            width: 100%;
+            display: block;
+        }
+
+        .snap-btn {
+            background: #ff4d6d;
+            border: none;
+            color: white;
+            padding: 16px 45px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+
+        canvas { display: none; }
+    </style>
+</head>
+<body>
+
+    <h1>📸 Photobooth Verlyn & Dimaz</h1>
+    <p>Pilih bingkai favoritmu dan cekrek!</p>
+
+    <div class="frame-selection">
+        <img src="frame/frame 1.png" class="frame-thumb active" onclick="changeFrame('frame/frame 1.png', this)">
+        <img src="frame/frame 2.png" class="frame-thumb" onclick="changeFrame('frame/frame 2.png', this)">
+        <img src="frame/frame 4.png" class="frame-thumb" onclick="changeFrame('frame/frame 4.png', this)">
+        <img src="frame/frame 6.png" class="frame-thumb" onclick="changeFrame('frame/frame 6.png', this)">
+        <img src="frame/frame 7.png" class="frame-thumb" onclick="changeFrame('frame/frame 7.png', this)">
+        <img src="frame/frame 8.png" class="frame-thumb" onclick="changeFrame('frame/frame 8.png', this)">
+    </div>
+
+    <div id="camera-wrapper">
+        <div id="camera-container">
+            <video id="video" autoplay playsinline></video>
+            <div class="frame-overlay">
+                <img id="frame-img" src="frame/frame 1.png"> 
+            </div>
+        </div>
+    </div>
+
+    <button onclick="takeSnap()" class="snap-btn">CEKREK!</button>
+
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const context = canvas.getContext('2d');
+        const mainFrameImg = document.getElementById('frame-img');
+        let currentFramePath = 'frame/frame 1.png'; 
+
+        async function initCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { facingMode: "user" } 
+                });
+                video.srcObject = stream;
+            } catch (err) {
+                alert("Kamera tidak bisa diakses!");
+            }
+        }
+
+        function changeFrame(path, element) {
+            currentFramePath = path;
+            mainFrameImg.src = path;
+            document.querySelectorAll('.frame-thumb').forEach(img => img.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function takeSnap() {
+    const frameToDraw = new Image();
+    frameToDraw.src = currentFramePath; 
+    
+    frameToDraw.onload = function() {
+        canvas.width = frameToDraw.width;
+        canvas.height = frameToDraw.height;
+        const videoRatio = video.videoWidth / video.videoHeight;
+        const canvasRatio = canvas.width / canvas.height;
+        
+        let sourceWidth, sourceHeight, sourceX, sourceY;
+
+        if (videoRatio > canvasRatio) {
+            sourceHeight = video.videoHeight;
+            sourceWidth = video.videoHeight * canvasRatio;
+            sourceX = (video.videoWidth - sourceWidth) / 2;
+            sourceY = 0;
+        } else {
+            sourceWidth = video.videoWidth;
+            sourceHeight = video.videoWidth / canvasRatio;
+            sourceX = 0;
+            sourceY = (video.videoHeight - sourceHeight) / 2;
+        }
+
+        context.save();
+        context.translate(canvas.width, 0);
+        context.scale(-1, 1);
+        
+        context.drawImage(
+            video, 
+            sourceX, sourceY, sourceWidth, sourceHeight, 
+            0, 0, canvas.width, canvas.height           
+        );
+        context.restore();
+
+        context.drawImage(frameToDraw, 0, 0, canvas.width, canvas.height);
+        
+        const link = document.createElement('a');
+        link.download = 'Momen_Verlyn_Dimaz.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    };
+}
+
+        initCamera();
+    </script>
+</body>
+</html>
